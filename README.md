@@ -46,7 +46,7 @@ It's not just a project—it's a step toward #EducationForAll 🌍
 1. Clone the repository:
 
    ```
-   git clone https://github.com/Rakesh-ada/LearnEX.git
+   git clone https://github.com/BikramMondal5/LearnEX.git
    cd study-marketplace
    ```
 
