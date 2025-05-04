@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thumbnail Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #1a1a2e;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .thumbnail-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+    }
+    .thumbnail {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      background-color: #2d2d4e;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Blockchain Thumbnail Test</h1>
+  
+  <div class="thumbnail-container">
+    <div class="thumbnail">
+      <div id="blockchain1" style="width: 100%; height: 100%;"></div>
+      <div class="label">Blockchain Technology</div>
+    </div>
+    
+    <div class="thumbnail">
+      <div id="blockchain2" style="width: 100%; height: 100%;"></div>
+      <div class="label">Crypto Trading</div>
+    </div>
+    
+    <div class="thumbnail">
+      <div id="blockchain3" style="width: 100%; height: 100%;"></div>
+      <div class="label">NFT Development</div>
+    </div>
+    
+    <div class="thumbnail">
+      <div id="blockchain4" style="width: 100%; height: 100%;"></div>
+      <div class="label">Decentralized Finance</div>
+    </div>
+  </div>
+
+  <script>
+    // Simple hash function (same as in your TypeScript file)
+    function simpleHash(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash = hash & hash; // Convert to 32bit integer
+      }
+      return Math.abs(hash);
+    }
+
+    // Color palette for blockchain
+    const blockchainPalette = ['#5928E5', '#8860F9', '#A482FC', '#D3C5FC', '#B9A8FF'];
+
+    // Generate a pixel grid for blockchain (with the updated algorithm)
+    function generateBlockchainGrid(title) {
+      const hash = simpleHash(title);
+      const grid = Array(8).fill(0).map(() => Array(8).fill(0));
+      
+      let value = hash;
+      
+      // First, fill in a base pattern with medium-dark colors
+      for (let y = 0; y < 8; y++) {
+        for (let x = 0; x < 8; x++) {
+          // Default to color index 2 (medium shade from the palette)
+          grid[y][x] = 2;
+        }
+      }
+      
+      // Then, apply a randomized pattern on top based on the hash
+      for (let y = 0; y < 8; y++) {
+        for (let x = 0; x < 4; x++) {
+          const colorValue = value % 5;
+          
+          // Top part (face-like area) - lighter colors
+          if (y < 4) {
+            // Make corners lighter
+            if (y < 2 && (x < 2 || x > 5)) {
+              grid[y][x] = Math.max(3, colorValue);
+            } 
+            // Always fill the middle section with darker colors (no gaps)
+            else if (y === 3 && (x >= 1 && x <= 2)) {
+              grid[y][x] = Math.min(1, colorValue);
+            }
+            // Random variation for other pixels
+            else {
+              grid[y][x] = colorValue;
+            }
+          }
+          // Bottom part - more consistent dark colors
+          else {
+            grid[y][x] = Math.min(2, colorValue); // Ensures no light colors in bottom
+          }
+          
+          // Mirror to right side
+          grid[y][7-x] = grid[y][x];
+          
+          value = Math.floor(value / 3);
+        }
+      }
+      
+      // Force-fill the middle areas where gaps typically occur
+      for (let x = 2; x <= 5; x++) {
+        for (let y = 2; y <= 4; y++) {
+          // Ensure these critical middle pixels are always filled with a visible color
+          if (grid[y][x] > 2) {
+            grid[y][x] = 1; // Use a darker color to ensure visibility
+          }
+        }
+      }
+      
+      return grid;
+    }
+
+    // Convert grid to SVG
+    function gridToSVG(grid, palette) {
+      const svgSize = 400;
+      const pixelSize = svgSize / 8;
+      
+      let svgContent = '';
+      
+      // Create rectangles for each pixel
+      for (let y = 0; y < 8; y++) {
+        for (let x = 0; x < 8; x++) {
+          const colorIndex = grid[y][x];
+          const color = palette[colorIndex];
+          
+          svgContent += `<rect x="${x * pixelSize}" y="${y * pixelSize}" width="${pixelSize}" height="${pixelSize}" fill="${color}" />`;
+        }
+      }
+      
+      // Assemble the complete SVG
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${svgSize} ${svgSize}" width="100%" height="100%">
+        ${svgContent}
+      </svg>`;
+      
+      return svg;
+    }
+
+    // Generate and display thumbnails
+    function generateThumbnail(elementId, title) {
+      const grid = generateBlockchainGrid(title);
+      const svg = gridToSVG(grid, blockchainPalette);
+      document.getElementById(elementId).innerHTML = svg;
+    }
+
+    // Generate the thumbnails when the page loads
+    window.onload = function() {
+      generateThumbnail('blockchain1', 'Blockchain Technology');
+      generateThumbnail('blockchain2', 'Crypto Trading');
+      generateThumbnail('blockchain3', 'NFT Development');
+      generateThumbnail('blockchain4', 'Decentralized Finance');
+    };
+  </script>
+</body>
+</html> 

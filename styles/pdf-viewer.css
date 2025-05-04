@@ -1,0 +1,169 @@
+/* PDF Viewer styles */
+.pdf-document {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  cursor: zoom-in;
+}
+
+.pdf-page {
+  margin: 10px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hide chrome PDF viewer header */
+iframe {
+  /* This removes the default Chrome PDF viewer UI */
+  border: none !important;
+  outline: none !important;
+}
+
+/* Custom styles for the PDF container */
+.pdf-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 80vh; /* Ensure it takes up most of the viewport height */
+  background-color: #2d3748;
+  overflow: auto;
+  position: relative;
+  z-index: 1;
+  cursor: zoom-in;
+}
+
+/* Main PDF viewer container - ensure it's fullscreen ready */
+.pdf-viewer-main {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+/* Fix for button interactions */
+.react-pdf__Page {
+  position: relative;
+  z-index: 1;
+}
+
+.react-pdf__Page canvas {
+  display: block;
+  user-select: none;
+}
+
+/* Make sure controls are above the PDF */
+.pdf-controls {
+  position: relative;
+  z-index: 10;
+}
+
+/* For hiding PDF iframe UI */
+@media print {
+  header, footer, nav, .controls, .toolbar {
+    display: none !important;
+  }
+}
+
+/* AI Assistant Styles */
+.ai-panel {
+  transition: all 0.3s ease;
+}
+
+.ai-message {
+  animation: fadeIn 0.3s ease;
+}
+
+.ai-suggestion {
+  transition: all 0.2s ease;
+}
+
+.ai-suggestion:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar styles */
+.pdf-viewer-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.pdf-viewer-container::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 4px;
+}
+
+.pdf-viewer-container::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 4px;
+}
+
+.pdf-viewer-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.7);
+}
+
+/* Add these styles for better code block handling in the PDF viewer */
+.chat-response-container pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-response-container pre code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-response-container .markdown-content {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.chat-response-container table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.chat-response-container p, 
+.chat-response-container h1, 
+.chat-response-container h2, 
+.chat-response-container h3, 
+.chat-response-container h4, 
+.chat-response-container h5, 
+.chat-response-container h6,
+.chat-response-container li,
+.chat-response-container blockquote {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Ensure links properly wrap */
+.chat-response-container a {
+  word-break: break-all;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Default Thumbnail</title>
+  <style>
+    body { margin: 0; padding: 20px; background: #f0f0f0; font-family: Arial, sans-serif; }
+    .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { color: #6D28D9; }
+    .thumbnail { width: 400px; height: 400px; margin: 20px 0; }
+    .btn { display: inline-block; background: #6D28D9; color: white; padding: 10px 15px; border-radius: 4px; text-decoration: none; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Default Thumbnail</h1>
+    <p>Right-click on the image below and choose "Save Image As..." to save as PNG.</p>
+    <img src="default.svg" alt="Default Thumbnail" class="thumbnail" id="thumbnail">
+    <br>
+    <a href="#" class="btn" id="downloadBtn">Download PNG</a>
+  </div>
+  
+  <script>
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 400;
+      canvas.height = 400;
+      const ctx = canvas.getContext('2d');
+      const img = document.getElementById('thumbnail');
+      
+      ctx.drawImage(img, 0, 0, 400, 400);
+      
+      const link = document.createElement('a');
+      link.download = 'default.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  </script>
+</body>
+</html>

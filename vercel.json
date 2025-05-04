@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_CONTRACT_ADDRESS": "0xe12D1e1698d7E07206b5C6C49466631c4dDfbF1B",
+    "NEXT_PUBLIC_CHAIN_ID": "656476",
+    "NEXT_PUBLIC_PLATFORM_FEE_PERCENT": "2.5"
+  },
+  "github": {
+    "silent": true,
+    "autoJobCancelation": true
+  }
+} 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Font Downloader</title>
+    <script>
+        async function downloadFont() {
+            try {
+                const response = await fetch('https://unpkg.com/three@0.77.0/examples/fonts/helvetiker_bold.typeface.json');
+                const fontData = await response.json();
+                
+                // Create a download link
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fontData));
+                const downloadAnchorNode = document.createElement('a');
+                downloadAnchorNode.setAttribute("href", dataStr);
+                downloadAnchorNode.setAttribute("download", "helvetiker_bold.typeface.json");
+                document.body.appendChild(downloadAnchorNode);
+                downloadAnchorNode.click();
+                downloadAnchorNode.remove();
+                
+                document.getElementById('status').textContent = 'Font downloaded successfully! Please move it to the public/fonts directory.';
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error downloading font: ' + error.message;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Three.js Font Downloader</h1>
+    <p>Click the button below to download the helvetiker_bold.typeface.json font file:</p>
+    <button onclick="downloadFont()">Download Font</button>
+    <p id="status"></p>
+</body>
+</html> 

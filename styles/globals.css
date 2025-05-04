@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .font-space {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  
+  .bg-mesh-gradient {
+    background-image: radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparent 50%),
+                     radial-gradient(at 97% 21%, hsla(256, 98%, 72%, 0.2) 0px, transparent 50%),
+                     radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.2) 0px, transparent 50%),
+                     radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.2) 0px, transparent 50%),
+                     radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 0.2) 0px, transparent 50%),
+                     radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 0.2) 0px, transparent 50%),
+                     radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 0.2) 0px, transparent 50%);
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r;
+  }
+  
+  .text-gradient-blue-purple {
+    @apply text-gradient from-blue-500 via-indigo-500 to-purple-600;
+  }
+  
+  .text-gradient-purple-pink {
+    @apply text-gradient from-purple-600 via-fuchsia-500 to-pink-500;
+  }
+  
+  .text-gradient-blue-cyan {
+    @apply text-gradient from-blue-600 via-cyan-500 to-teal-400;
+  }
+  
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl;
+  }
+  
+  .glass-input {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-lg focus:border-purple-500/50 focus:ring-purple-500/20;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 230 20% 5%;
+    --foreground: 210 40% 98%;
+    --card: 230 20% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 230 20% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 250 95% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 76% 56%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 230 20% 15%;
+    --muted-foreground: 210 40% 70%;
+    --accent: 271 91% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 230 20% 18%;
+    --input: 230 20% 12%;
+    --ring: 250 95% 65%;
+    --chart-1: 250 95% 65%;
+    --chart-2: 217 76% 56%;
+    --chart-3: 271 91% 65%;
+    --chart-4: 190 80% 50%;
+    --chart-5: 330 80% 60%;
+    --radius: 0.75rem;
+    --sidebar-background: 230 20% 7%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 250 95% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 230 20% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 230 20% 18%;
+    --sidebar-ring: 250 95% 65%;
+  }
+  .dark {
+    --background: 230 20% 5%;
+    --foreground: 210 40% 98%;
+    --card: 230 20% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 230 20% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 250 95% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 76% 56%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 230 20% 15%;
+    --muted-foreground: 210 40% 70%;
+    --accent: 271 91% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 230 20% 18%;
+    --input: 230 20% 12%;
+    --ring: 250 95% 65%;
+    --chart-1: 250 95% 65%;
+    --chart-2: 217 76% 56%;
+    --chart-3: 271 91% 65%;
+    --chart-4: 190 80% 50%;
+    --chart-5: 330 80% 60%;
+    --sidebar-background: 230 20% 7%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 250 95% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 230 20% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 230 20% 18%;
+    --sidebar-ring: 250 95% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Global word break and wrap utilities */
+.break-words {
+  word-break: break-word;
+}
+
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}
+
+/* Fix for the PDF viewer AI response container */
+.chat-response-container {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.chat-response-container pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.chat-response-container code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Ensure tables don't break the layout */
+.markdown-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}

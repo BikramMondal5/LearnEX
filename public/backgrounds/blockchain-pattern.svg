@@ -1,0 +1,41 @@
+<svg width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="hexagons" width="100" height="100" patternUnits="userSpaceOnUse" patternTransform="scale(0.5)">
+      <!-- Background -->
+      <rect width="100%" height="100%" fill="#0f172a"/>
+      
+      <!-- Hexagons -->
+      <path d="M50,0 L95,25 L95,75 L50,100 L5,75 L5,25 Z" fill="none" stroke="rgba(147, 51, 234, 0.15)" stroke-width="1"/>
+      <path d="M150,0 L195,25 L195,75 L150,100 L105,75 L105,25 Z" fill="none" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1"/>
+      <path d="M50,100 L95,125 L95,175 L50,200 L5,175 L5,125 Z" fill="none" stroke="rgba(236, 72, 153, 0.15)" stroke-width="1"/>
+      <path d="M150,100 L195,125 L195,175 L150,200 L105,175 L105,125 Z" fill="none" stroke="rgba(79, 70, 229, 0.15)" stroke-width="1"/>
+      
+      <!-- Connection lines -->
+      <line x1="50" y1="0" x2="50" y2="100" stroke="rgba(147, 51, 234, 0.1)" stroke-width="1"/>
+      <line x1="95" y1="25" x2="150" y2="0" stroke="rgba(59, 130, 246, 0.1)" stroke-width="1"/>
+      <line x1="95" y1="75" x2="150" y2="100" stroke="rgba(236, 72, 153, 0.1)" stroke-width="1"/>
+      <line x1="5" y1="75" x2="50" y2="100" stroke="rgba(79, 70, 229, 0.1)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Apply the pattern to the entire SVG -->
+  <rect width="100%" height="100%" fill="url(#hexagons)"/>
+  
+  <!-- Add some random dots for data points -->
+  <g fill="rgba(255, 255, 255, 0.2)">
+    <circle cx="100" cy="150" r="2"/>
+    <circle cx="200" cy="300" r="1.5"/>
+    <circle cx="350" cy="200" r="1"/>
+    <circle cx="500" cy="400" r="2"/>
+    <circle cx="600" cy="150" r="1.5"/>
+    <circle cx="700" cy="350" r="1"/>
+    <circle cx="250" cy="450" r="2"/>
+    <circle cx="400" cy="600" r="1.5"/>
+    <circle cx="550" cy="500" r="1"/>
+    <circle cx="150" cy="650" r="2"/>
+    <circle cx="300" cy="700" r="1.5"/>
+    <circle cx="450" cy="750" r="1"/>
+    <circle cx="650" cy="600" r="2"/>
+    <circle cx="750" cy="250" r="1.5"/>
+  </g>
+</svg> 
